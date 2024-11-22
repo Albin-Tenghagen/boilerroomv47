@@ -173,7 +173,7 @@ domesticButton.addEventListener("click", function() {
 foreignButton.addEventListener("click", function() {
   console.log("sportButton is responsive")
   articleSection.replaceChildren();
-    fetch('https://newsapi.org/v2/everything?q=language=sv&from=2024-11-03&sortBy=publishedAt&apiKey=1006e9f332db40bd8553b27720785488')
+    fetch('https://newsapi.org/v2/everything?q=language=sv&from=2024-02-03&sortBy=publishedAt&apiKey=1006e9f332db40bd8553b27720785488')
     .then(response =>  {
       if(!response.ok) {
           throw new Error('HTTP-fel! status' + response.statusText);
