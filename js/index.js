@@ -62,6 +62,10 @@ let searchNewsButton = document.createElement("button")
 searchNewsButton.setAttribute("class", "searchNewsButton")
 searchNewsButton.innerText = "Search"
 searchForm.appendChild(searchNewsButton)
+
+let articleSection = document.createElement("section")
+articleSection.setAttribute("class", "articleSection")
+newsContainer.appendChild(articleSection)
 //--------------------------------------------------------------------------
 
 //----------------------Search function-------------------------------------
@@ -105,7 +109,7 @@ window.addEventListener("DOMContentLoaded", function(){
     articleArray.forEach(article => {
       let articleContainer = document.createElement("article")
       articleContainer.setAttribute("class", "articleContainer")
-      newsContainer.appendChild(articleContainer)
+      articleSection.appendChild(articleContainer)
 
       let articleTitle = document.createElement("h3")
       articleTitle.textContent =  article.title
@@ -149,9 +153,7 @@ window.addEventListener("DOMContentLoaded", function(){
 
 
 
-  //TODO Default news that should be displayed as the page is loading in main
-  //TODO should create several article elements that append to newsContainer
-  //TODO one article element per news, h1 for titel, p for summary, p for timeStamp, p for Author or source
+
 })
 
 sportButton.addEventListener("click", function() {
@@ -170,10 +172,77 @@ domesticButton.addEventListener("click", function() {
 
 foreignButton.addEventListener("click", function() {
   console.log("sportButton is responsive")
-    //TODO empty the newsContainer and create articles basen on category
+  articleSection.replaceChildren();
+    fetch('https://newsapi.org/v2/everything?q=language=sv&from=2024-11-03&sortBy=publishedAt&apiKey=1006e9f332db40bd8553b27720785488')
+    .then(response =>  {
+      if(!response.ok) {
+          throw new Error('HTTP-fel! status' + response.statusText);
+      }
+      console.log("response", response )
+      return response.json()
+    })
+    .then(data => {
+      console.log(data)
+      let articleArray = data.articles
+  
+      console.log("articleArray", articleArray )
+      articleArray.forEach(article => {
+        let articleContainer = document.createElement("article")
+        articleContainer.setAttribute("class", "articleContainer")
+        articleSection.appendChild(articleContainer)
+  
+        let articleTitle = document.createElement("h3")
+        articleTitle.textContent =  article.title
+        articleTitle.setAttribute("class", "articleTitle")
+        articleContainer.appendChild(articleTitle) 
+  
+        let articleSummary = document.createElement("p")
+        articleSummary.setAttribute("class", "articleSummary")
+        articleSummary.textContent = article.description;
+        articleContainer.appendChild(articleSummary)
+  
+        let timeStamp = document.createElement("p")
+        timeStamp.setAttribute("class", "timeStamp")
+        // Formatera tidsstämpeln
+        let publishedAt = article.publishedAt // Exempel: "2024-11-22T15:30:00Z"
+        let dateAndTime = publishedAt.replace("Z", "").split("T") // Delar på "T" för att separera datum och tid
+        let formattedTimeStamp = `${dateAndTime[0]} ${dateAndTime[1]}` // Lägger till mellanrum mellan datum och tid
+        timeStamp.textContent = formattedTimeStamp
+        articleContainer.appendChild(timeStamp)
+        
+        let articleAuthor = document.createElement("p")
+        articleAuthor.setAttribute("class", "articleAuthor")
+        articleAuthor.textContent = article.author;
+        articleContainer.appendChild(articleAuthor)
+      
+        let articleImage = document.createElement("img")
+        articleImage.setAttribute("class", "articleImage")
+        articleImage.src = article.urlToImage    
+        articleContainer.append(articleImage)
+  
+        let readMoreButton = document.createElement("button")
+        readMoreButton.textContent = "Läs mer"
+        readMoreButton.setAttribute("class", "readMoreButton")
+        articleContainer.appendChild(readMoreButton)
+      });
+  })
+  
+    .catch((err) => {
+      console.log("error", err)
+    })
+  
+  
+  
+  
+  })
+  
+
+    
+  
+  //TODO empty the newsContainer and create articles basen on category
   //TODO should create several article elements that append to newsContainer
   //TODO one article element per news, h1 for titel, p for summary, p for timeStamp, p for Author or source
-});
+;
 
 economyButton.addEventListener("click", function() {
   console.log("sportButton is responsive")
