@@ -1,16 +1,8 @@
-
-
-    // fetch('https://newsapi.org/v2/everything?q=sverige&from=2024-11-03&sortBy=publishedAt&apiKey=1006e9f332db40bd8553b27720785488')
-    //   .then(response => {
-    //     if (!response.ok) {
-    //       throw new Error('Network response was not ok ' + response.statusText);
-    //     }
-    //     return response.json(); // Parse JSON data from the response
-    //   })
-    //   .then(data => console.log(data)) // Use the data
-    //   .catch(error => console.error('There has been a problem with your fetch operation:', error));
-
-
+function removeAllChildren(articleSection) {
+   while( articleSection.firstChild) {
+    articleSection.removeChild(articleSection.firstChild)
+   }
+}
 
 //-----------------Header Creation------------------------------------------
 let headerContainer = document.createElement("header")
@@ -62,6 +54,11 @@ let searchNewsButton = document.createElement("button")
 searchNewsButton.setAttribute("class", "searchNewsButton")
 searchNewsButton.innerText = "Search"
 searchForm.appendChild(searchNewsButton)
+
+let articleSection = document.createElement("section")
+articleSection.setAttribute("class", "articleSection")
+newsContainer.appendChild(articleSection)
+
 //--------------------------------------------------------------------------
 
 //----------------------Search function-------------------------------------
@@ -105,7 +102,7 @@ window.addEventListener("DOMContentLoaded", function(){
     articleArray.forEach(article => {
       let articleContainer = document.createElement("article")
       articleContainer.setAttribute("class", "articleContainer")
-      newsContainer.appendChild(articleContainer)
+      articleSection.appendChild(articleContainer)
 
       let articleTitle = document.createElement("h3")
       articleTitle.textContent =  article.title
@@ -176,7 +173,67 @@ foreignButton.addEventListener("click", function() {
 });
 
 economyButton.addEventListener("click", function() {
-  console.log("sportButton is responsive")
+  let articleArray = [] 
+  removeAllChildren(articleSection)
+  console.log("articleArray", articleArray)  
+  console.log("economyButton is responsive")
+  fetch('https://newsapi.org/v2/top-headlines/sources?language=sv&category=business&apiKey=1006e9f332db40bd8553b27720785488')
+  .then(response =>  {
+    if(!response.ok) {
+        throw new Error('HTTP-fel! status' + response.statusText);
+    }
+    console.log("response", response )
+    return response.json()
+  })
+  .then(data => {
+    console.log(data)
+    let articleArray = data.articles
+
+    console.log("articleArray", articleArray )
+    articleArray.forEach(article => {
+      let articleContainer = document.createElement("article")
+      articleContainer.setAttribute("class", "articleContainer")
+      articleSection.appendChild(articleContainer)
+
+      let articleTitle = document.createElement("h3")
+      articleTitle.textContent =  article.title
+      articleTitle.setAttribute("class", "articleTitle")
+      articleContainer.appendChild(articleTitle) 
+
+      let articleSummary = document.createElement("p")
+      articleSummary.setAttribute("class", "articleSummary")
+      articleSummary.textContent = article.description;
+      articleContainer.appendChild(articleSummary)
+
+      let timeStamp = document.createElement("p")
+      timeStamp.setAttribute("class", "timeStamp")
+      // Formatera tidsstämpeln
+      let publishedAt = article.publishedAt // Exempel: "2024-11-22T15:30:00Z"
+      let dateAndTime = publishedAt.replace("Z", "").split("T") // Delar på "T" för att separera datum och tid
+      let formattedTimeStamp = `${dateAndTime[0]} ${dateAndTime[1]}` // Lägger till mellanrum mellan datum och tid
+      timeStamp.textContent = formattedTimeStamp
+      articleContainer.appendChild(timeStamp)
+      
+      let articleAuthor = document.createElement("p")
+      articleAuthor.setAttribute("class", "articleAuthor")
+      articleAuthor.textContent = article.author;
+      articleContainer.appendChild(articleAuthor)
+    
+      let articleImage = document.createElement("img")
+      articleImage.setAttribute("class", "articleImage")
+      articleImage.src = article.urlToImage    
+      articleContainer.append(articleImage)
+
+      let readMoreButton = document.createElement("button")
+      readMoreButton.textContent = "Läs mer"
+      readMoreButton.setAttribute("class", "readMoreButton")
+      articleContainer.appendChild(readMoreButton)
+    });
+})
+
+  .catch((err) => {
+    console.log("error", err)
+  })
     //TODO empty the newsContainer and create articles basen on category
     //TODO empty the newsContainer and create articles basen on category
   //TODO should create several article elements that append to newsContainer
