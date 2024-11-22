@@ -49,15 +49,19 @@ let newsContainer = document.createElement("main")
 newsContainer.setAttribute("class", "newsContainer")
 document.body.appendChild(newsContainer)
 
+let searchForm = document.createElement("form")
+searchForm.setAttribute("class", "searchForm")
+newsContainer.appendChild(searchForm)
+
 let searchNewsInput = document.createElement("input")
 searchNewsInput.setAttribute("class", "searchNewsInput")
 searchNewsInput.setAttribute("placeholder", "Search articles")
-newsContainer.appendChild(searchNewsInput)
+searchForm.appendChild(searchNewsInput)
 
 let searchNewsButton = document.createElement("button")
 searchNewsButton.setAttribute("class", "searchNewsButton")
 searchNewsButton.innerText = "Search"
-newsContainer.appendChild(searchNewsButton)
+searchForm.appendChild(searchNewsButton)
 //--------------------------------------------------------------------------
 
 //----------------------Search function-------------------------------------
@@ -69,7 +73,7 @@ newsContainer.appendChild(searchNewsButton)
 //   }
 // })
 
-searchNewsButton.addEventListener("click", function () {
+searchForm.addEventListener("submit", function () {
 //? searchin endpoint maybe?  
 //TODO incorporate submit eventlistener if possible
   if(searchNewsInput.value.trim() === "") {
