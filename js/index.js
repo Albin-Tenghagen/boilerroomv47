@@ -89,7 +89,7 @@ searchForm.addEventListener("submit", function () {
 //------------------Category Selection--------------------------------------
 window.addEventListener("DOMContentLoaded", function(){
   //? Top headlines endpoint maybe?
-  fetch('https://newsapi.org/v2/everything?q=sverige&from=2024-11-03&sortBy=publishedAt&apiKey=1006e9f332db40bd8553b27720785488')
+  fetch('https://newsapi.org/v2/everything?q=sverige&language=sv&from=2024-11-03&sortBy=publishedAt&apiKey=1006e9f332db40bd8553b27720785488')
   .then(response =>  {
     if(!response.ok) {
         throw new Error('HTTP-fel! status' + response.statusText);
@@ -97,7 +97,9 @@ window.addEventListener("DOMContentLoaded", function(){
     console.log("response", response )
     return response.json()
   })
-  .then(data => console.log(data))
+  .then(data => {
+    console.log(data)
+})
 
   .catch((err) => {
     console.log("error", err)
