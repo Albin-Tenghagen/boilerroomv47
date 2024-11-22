@@ -107,7 +107,7 @@ window.addEventListener("DOMContentLoaded", function(){
       articleContainer.setAttribute("class", "articleContainer")
       newsContainer.appendChild(articleContainer)
 
-      let articleTitle = document.createElement("h5")
+      let articleTitle = document.createElement("h3")
       articleTitle.textContent =  article.title
       articleTitle.setAttribute("class", "articleTitle")
       articleContainer.appendChild(articleTitle) 
@@ -135,6 +135,11 @@ window.addEventListener("DOMContentLoaded", function(){
       articleImage.setAttribute("class", "articleImage")
       articleImage.src = article.urlToImage    
       articleContainer.append(articleImage)
+
+      let readMoreButton = document.createElement("button")
+      readMoreButton.textContent = "Läs mer"
+      readMoreButton.setAttribute("class", "readMoreButton")
+      articleContainer.appendChild(readMoreButton)
     });
 })
 
