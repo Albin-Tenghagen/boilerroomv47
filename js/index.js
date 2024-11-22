@@ -1,14 +1,14 @@
 
 
-fetch('https://newsapi.org/v2/everything?q=sweden&from=2024-10-21&sortBy=publishedAt&apiKey=a5e3e0dc52244181a7517d579bb03bb5')
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok ' + response.statusText);
-    }
-    return response.json(); // Parse JSON data from the response
-  })
-  .then(data => console.log(data)) // Use the data
-  .catch(error => console.error('There has been a problem with your fetch operation:', error));
+    // fetch('https://newsapi.org/v2/everything?q=sweden&from=2024-10-21&sortBy=publishedAt&apiKey=a5e3e0dc52244181a7517d579bb03bb5')
+    //   .then(response => {
+    //     if (!response.ok) {
+    //       throw new Error('Network response was not ok ' + response.statusText);
+    //     }
+    //     return response.json(); // Parse JSON data from the response
+    //   })
+    //   .then(data => console.log(data)) // Use the data
+    //   .catch(error => console.error('There has been a problem with your fetch operation:', error));
 
 
 
@@ -89,6 +89,21 @@ searchForm.addEventListener("submit", function () {
 //------------------Category Selection--------------------------------------
 window.addEventListener("DOMContentLoaded", function(){
   //? Top headlines endpoint maybe?
+  fetch("https://newsapi.org/v2/top-headlines/sources?country=sv&language=sv&apiKey=0db69991ed83415fa6f591a1924e45ef")
+  .then(response =>  {
+    if(!response.ok) {
+        throw new Error(`HTTP-fel! status ${response.status}`)
+    }
+    console.log("response", response )
+    return response.json
+  })
+  .then((data) => {
+    console.log(data)
+
+  })
+  .catch((err) => {
+    console.log("error", err)
+  })
   //TODO Default news that should be displayed as the page is loading in main
   //TODO should create several article elements that append to newsContainer
   //TODO one article element per news, h1 for titel, p for summary, p for timeStamp, p for Author or source
