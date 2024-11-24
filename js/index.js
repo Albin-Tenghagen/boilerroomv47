@@ -22,10 +22,10 @@ headingHeader.setAttribute("class", "headingHeader")
 headingHeader.innerText = "Welcome to the latest news"
 headerContainer.appendChild(headingHeader)
 
-let sportButton = document.createElement("button")
-sportButton.setAttribute("class", "sportButton")
-sportButton.innerText = "Sport"
-headerContainer.appendChild(sportButton)
+let techButton = document.createElement("button")
+techButton.setAttribute("class", "techButton")
+techButton.innerText = "Tech"
+headerContainer.appendChild(techButton)
 
 let appleButton = document.createElement("button")
 sportButton.setAttribute("class", "appleButton")
@@ -111,7 +111,7 @@ window.addEventListener("DOMContentLoaded", function(){
       articleContainer.setAttribute("class", "articleContainer")
       articleSection.appendChild(articleContainer)
 
-      let articleTitle = document.createElement("h3")
+      let articleTitle = document.createElement("h5")
       articleTitle.textContent =  article.title
       articleTitle.setAttribute("class", "articleTitle")
       articleContainer.appendChild(articleTitle) 
@@ -139,11 +139,6 @@ window.addEventListener("DOMContentLoaded", function(){
       articleImage.setAttribute("class", "articleImage")
       articleImage.src = article.urlToImage    
       articleContainer.append(articleImage)
-
-      let readMoreButton = document.createElement("button")
-      readMoreButton.textContent = "Läs mer"
-      readMoreButton.setAttribute("class", "readMoreButton")
-      articleContainer.appendChild(readMoreButton)
     });
 })
 
