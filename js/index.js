@@ -228,7 +228,7 @@ techButton.addEventListener("click", function () {
   console.log("SportButton is responsive");
 
   // empties newsContainer
-  newsContainer.innerHTML = "";
+  articleSection.replaceChildren();
 
   // API-endpoint for sportnews
   let apiUrl = `https://newsapi.org/v2/everything?q=tech&language=en&from=2024-11-03&sortBy=publishedAt&apiKey=a5e3e0dc52244181a7517d579bb03bb5`;
