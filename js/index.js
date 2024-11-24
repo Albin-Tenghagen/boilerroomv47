@@ -72,8 +72,8 @@ newsContainer.appendChild(articleSection)
 
 searchForm.addEventListener("submit", function () {
 //? searchin endpoint maybe?  
-let searchTerm =  document.getElementsByClassName("searchNewsInput").value.trim();  
-if(searchTerm.value.trim() === "") {
+let searchTerm =  searchNewsInput.value.trim();  
+if(searchTerm.trim() === "") {
     console.log("Error, input is empty")
   } else {
     console.log("input is not empty, yay!")
@@ -85,7 +85,7 @@ if(searchTerm.value.trim() === "") {
 function searchForArticles(query) {
   const yourApiKey = '1006e9f332db40bd8553b27720785488'
   const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&language=sv&from=2024-11-03&sortBy=publishedAt&apiKey=${yourApiKey}`
-
+  removeAllChildren(articleSection)
   fetch(url)
     .then(response =>  {
     if(!response.ok) {
@@ -100,7 +100,7 @@ function searchForArticles(query) {
 
     if(articleArray.length === 0) {
       articleSection.innerHTML = '<p>Inga artiklar funna<p>' 
-    }
+    } else {
 
     console.log("articleArray", articleArray )
     articleArray.forEach(article => {
@@ -140,8 +140,9 @@ function searchForArticles(query) {
       let readMoreButton = document.createElement("button")
       readMoreButton.textContent = "Läs mer"
       readMoreButton.setAttribute("class", "readMoreButton")
-      articleContainer.appendChild(readMoreButton)
+      articleContainer.appendChild(readMoreButton) 
     });
+  }
 })
 
   .catch((err) => {
@@ -258,6 +259,11 @@ economyButton.addEventListener("click", function() {
     console.log(data)
     let articleArray = data.articles
 
+    if(articleArray === undefined) {
+      articleSection.innerHTML = '<p>Inga artiklar funna<p>' 
+    } else {
+
+
     console.log("articleArray", articleArray )
     articleArray.forEach(article => {
       let articleContainer = document.createElement("article")
@@ -298,7 +304,9 @@ economyButton.addEventListener("click", function() {
       readMoreButton.setAttribute("class", "readMoreButton")
       articleContainer.appendChild(readMoreButton)
     });
-})
+
+  }
+  })
 
   .catch((err) => {
     console.log("error", err)
