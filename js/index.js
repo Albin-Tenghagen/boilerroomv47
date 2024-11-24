@@ -249,6 +249,10 @@ techButton.addEventListener("click", function () {
       let articleArray = data.articles;
       console.log("articleArray", articleArray);
 
+      if(articleArray.length === 0) {
+        articleSection.innerHTML = '<p>No articles were found<p>' 
+      } else {
+
         articleArray.forEach(article => {
         let articleContainer = document.createElement("article");
         articleContainer.setAttribute("class", "articleContainer");
@@ -278,18 +282,19 @@ techButton.addEventListener("click", function () {
         articleContainer.appendChild(articleAuthor);
 
 
-          let articleImage = document.createElement("img");
-          articleImage.setAttribute("class", "articleImage");
-          articleImage.src = article.urlToImage;
-          articleContainer.appendChild(articleImage);
+        let articleImage = document.createElement("img");
+        articleImage.setAttribute("class", "articleImage");
+        articleImage.src = article.urlToImage;
+        articleContainer.appendChild(articleImage);
 
-          let readMoreButton = document.createElement("a")
-          readMoreButton.textContent = "Read more"
-          readMoreButton.setAttribute("class", "readMoreButton")
-          readMoreButton.href = article.url
-          articleContainer.appendChild(readMoreButton)
+        let readMoreButton = document.createElement("a")
+        readMoreButton.textContent = "Read more"
+        readMoreButton.setAttribute("class", "readMoreButton")
+        readMoreButton.href = article.url
+        articleContainer.appendChild(readMoreButton)
 
       });
+    }
     })
     .catch(error => console.error("There has been a problem with your fetch operation:", error));
 });
