@@ -29,3 +29,5 @@ default news setting ska bara innehålla svenska artiklar(SV parameter tillgäng
 En fetch request med parametrar baserat på kategori ska läggas till i respektive eventlistener
 
 en fetch request med en searchin parameter ska tilläggas inom input fältet
+
+before merge
