@@ -70,8 +70,9 @@ newsContainer.appendChild(articleSection)
 //   }
 // })
 
-searchForm.addEventListener("submit", function () {
+searchForm.addEventListener("submit", function (event) {
 //? searchin endpoint maybe?  
+event.preventDefault()
 let searchTerm =  searchNewsInput.value;  
 if(searchTerm.trim() === "") {
     console.log("Error, input is empty")
@@ -82,9 +83,9 @@ if(searchTerm.trim() === "") {
 
 })
 
-function searchForArticles(searchTerm) {
-  const yourApiKey = '0db69991ed83415fa6f591a1924e45ef'
-  const url = `https://newsapi.org/v2/everything?q=${searchTerm}&from=2024-11-03&sortBy=publishedAt&apiKey=${yourApiKey}`
+function searchForArticles(query) {
+
+  const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&language=en&from=2024-11-03&sortBy=publishedAt&apiKey=a5e3e0dc52244181a7517d579bb03bb5`
   removeAllChildren(articleSection)
   fetch(url)
     .then(response =>  {
@@ -99,7 +100,7 @@ function searchForArticles(searchTerm) {
     articleArray = data.articles
 
     if(articleArray.length === 0) {
-      articleSection.innerHTML = '<p>Inga artiklar funna<p>' 
+      articleSection.innerHTML = '<p>No articles were found<p>' 
     } else {
 
     console.log("articleArray", articleArray )
@@ -260,7 +261,7 @@ economyButton.addEventListener("click", function() {
     articleArray = data.articles
 
     if(articleArray.length === 0) {
-      articleSection.innerHTML = '<p>Inga artiklar funna<p>' 
+      articleSection.innerHTML = '<p>No articles were found<p>' 
     } else {
 
 
