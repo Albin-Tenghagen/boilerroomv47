@@ -22,13 +22,13 @@ headingHeader.setAttribute("class", "headingHeader")
 headingHeader.innerText = "Välkommen till aktuella nyheter"
 headerContainer.appendChild(headingHeader)
 
-let sportButton = document.createElement("button")
-sportButton.setAttribute("class", "sportButton")
-sportButton.innerText = "Sport"
-headerContainer.appendChild(sportButton)
+let techButton = document.createElement("button")
+techButton.setAttribute("class", "techButton")
+techButton.innerText = "Tech"
+headerContainer.appendChild(techButton)
 
 let domesticButton = document.createElement("button")
-sportButton.setAttribute("class", "domesticButton")
+domesticButton.setAttribute("class", "domesticButton")
 domesticButton.innerText = "Domestic"
 headerContainer.appendChild(domesticButton)
 
@@ -89,7 +89,7 @@ searchForm.addEventListener("submit", function () {
 //------------------Category Selection--------------------------------------
 window.addEventListener("DOMContentLoaded", function(){
   //? Top headlines endpoint maybe?
-  fetch('https://newsapi.org/v2/everything?q=sverige&language=en&from=2024-11-03&sortBy=publishedAt&apiKey=1006e9f332db40bd8553b27720785488')
+  fetch('https://newsapi.org/v2/top-headlines?country=us&apiKey=a5e3e0dc52244181a7517d579bb03bb5')
   .then(response =>  {
     if(!response.ok) {
         throw new Error('HTTP-fel! status' + response.statusText);
@@ -149,14 +149,14 @@ window.addEventListener("DOMContentLoaded", function(){
   //TODO one article element per news, h1 for titel, p for summary, p for timeStamp, p for Author or source
 })
 
-sportButton.addEventListener("click", function () {
+techButton.addEventListener("click", function () {
   console.log("SportButton is responsive");
 
   // empties newsContainer
   newsContainer.innerHTML = "";
 
   // API-endpoint for sportnews
-  let apiUrl = `https://newsapi.org/v2/everything?q=sport&language=sv&from=2024-11-03&sortBy=publishedAt&apiKey=1006e9f332db40bd8553b27720785488`;
+  let apiUrl = `https://newsapi.org/v2/everything?q=tech&language=en&from=2024-11-03&sortBy=publishedAt&apiKey=a5e3e0dc52244181a7517d579bb03bb5`;
 
   // Fetches data from apiUrl
   fetch(apiUrl)
@@ -172,19 +172,19 @@ sportButton.addEventListener("click", function () {
       let articleArray = data.articles;
       console.log("articleArray", articleArray);
 
-      articleArray.forEach(article => {
+        articleArray.forEach(article => {
         let articleContainer = document.createElement("article");
         articleContainer.setAttribute("class", "articleContainer");
         newsContainer.appendChild(articleContainer);
 
-        let articleTitle = document.createElement("h5");
+        let articleTitle = document.createElement("h3");
         articleTitle.textContent = article.title;
         articleTitle.setAttribute("class", "articleTitle");
         articleContainer.appendChild(articleTitle);
 
         let articleSummary = document.createElement("p");
         articleSummary.setAttribute("class", "articleSummary");
-        articleSummary.textContent = article.description || "Ingen beskrivning tillgänglig.";
+        articleSummary.textContent = article.description || "No description available.";
         articleContainer.appendChild(articleSummary);
 
         let timeStamp = document.createElement("p");
@@ -197,7 +197,7 @@ sportButton.addEventListener("click", function () {
 
         let articleAuthor = document.createElement("p");
         articleAuthor.setAttribute("class", "articleAuthor");
-        articleAuthor.textContent = article.author || "Okänd författare";
+        articleAuthor.textContent = article.author || "Unknown author";
         articleContainer.appendChild(articleAuthor);
 
 
@@ -205,11 +205,18 @@ sportButton.addEventListener("click", function () {
           articleImage.setAttribute("class", "articleImage");
           articleImage.src = article.urlToImage;
           articleContainer.appendChild(articleImage);
-        
+
+          let readMoreButton = document.createElement("a")
+          readMoreButton.textContent = "Read more"
+          readMoreButton.setAttribute("class", "readMoreButton")
+          readMoreButton.href = article.url
+          articleContainer.appendChild(readMoreButton)
+
       });
     })
     .catch(error => console.error("There has been a problem with your fetch operation:", error));
 });
+
 
 
 
