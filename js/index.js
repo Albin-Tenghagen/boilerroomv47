@@ -137,10 +137,11 @@ searchForm.addEventListener("submit", function (event) {
         articleImage.src = article.urlToImage    
         articleContainer.append(articleImage)
   
-        let readMoreButton = document.createElement("button")
-        readMoreButton.textContent = "Läs mer"
-        readMoreButton.setAttribute("class", "readMoreButton")
-        articleContainer.appendChild(readMoreButton) 
+        let readMoreButton = document.createElement("a")
+          readMoreButton.textContent = "Read more"
+          readMoreButton.setAttribute("class", "readMoreButton")
+          readMoreButton.href = article.url
+          articleContainer.appendChild(readMoreButton)
       });
     }
   })
@@ -206,10 +207,11 @@ window.addEventListener("DOMContentLoaded", function(){
       articleImage.src = article.urlToImage    
       articleContainer.append(articleImage)
 
-      let readMoreButton = document.createElement("button")
-      readMoreButton.textContent = "Läs mer"
-      readMoreButton.setAttribute("class", "readMoreButton")
-      articleContainer.appendChild(readMoreButton) 
+      let readMoreButton = document.createElement("a")
+          readMoreButton.textContent = "Read more"
+          readMoreButton.setAttribute("class", "readMoreButton")
+          readMoreButton.href = article.url
+          articleContainer.appendChild(readMoreButton)
     });
   }
 })
@@ -346,10 +348,11 @@ appleButton.addEventListener("click", function() {
         articleImage.src = article.urlToImage    
         articleContainer.append(articleImage)
   
-        let readMoreButton = document.createElement("button")
-        readMoreButton.textContent = "Läs mer"
-        readMoreButton.setAttribute("class", "readMoreButton")
-        articleContainer.appendChild(readMoreButton)
+        let readMoreButton = document.createElement("a")
+          readMoreButton.textContent = "Read more"
+          readMoreButton.setAttribute("class", "readMoreButton")
+          readMoreButton.href = article.url
+          articleContainer.appendChild(readMoreButton)
       });
     }
   })
@@ -423,10 +426,11 @@ teslaButton.addEventListener("click", function() {
         articleImage.src = article.urlToImage    
         articleContainer.append(articleImage)
   
-        let readMoreButton = document.createElement("button")
-        readMoreButton.textContent = "Läs mer"
-        readMoreButton.setAttribute("class", "readMoreButton")
-        articleContainer.appendChild(readMoreButton)
+        let readMoreButton = document.createElement("a")
+          readMoreButton.textContent = "Read more"
+          readMoreButton.setAttribute("class", "readMoreButton")
+          readMoreButton.href = article.url
+          articleContainer.appendChild(readMoreButton)
       });
     }
   })
@@ -505,10 +509,11 @@ economyButton.addEventListener("click", function() {
       articleImage.src = article.urlToImage    
       articleContainer.append(articleImage)
 
-      let readMoreButton = document.createElement("button")
-      readMoreButton.textContent = "Läs mer"
-      readMoreButton.setAttribute("class", "readMoreButton")
-      articleContainer.appendChild(readMoreButton)
+      let readMoreButton = document.createElement("a")
+          readMoreButton.textContent = "Read more"
+          readMoreButton.setAttribute("class", "readMoreButton")
+          readMoreButton.href = article.url
+          articleContainer.appendChild(readMoreButton)
     });
 
   }
