@@ -28,7 +28,7 @@ techButton.innerText = "Tech"
 headerContainer.appendChild(techButton)
 
 let appleButton = document.createElement("button")
-sportButton.setAttribute("class", "appleButton")
+appleButton.setAttribute("class", "appleButton")
 appleButton.innerText = "apple"
 headerContainer.appendChild(appleButton)
 
