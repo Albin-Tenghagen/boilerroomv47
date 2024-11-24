@@ -166,7 +166,7 @@ sportButton.addEventListener("click", function() {
 appleButton.addEventListener("click", function() {
   console.log("sportButton is responsive")
   articleSection.replaceChildren();
-    fetch('https://newsapi.org/v2/everything?q=apple&from=2024-11-23&to=2024-11-24&sortBy=popularity&apiKey=a5e3e0dc52244181a7517d579bb03bb5')
+    fetch('https://newsapi.org/v2/everything?q=apple&language=en&from=2024-10-24&sortBy=publishedAt&apiKey=a5e3e0dc52244181a7517d579bb03bb5')
     .then(response =>  {
       if(!response.ok) {
           throw new Error('HTTP-fel! status' + response.statusText);
