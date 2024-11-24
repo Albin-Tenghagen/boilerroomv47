@@ -315,7 +315,7 @@ appleButton.addEventListener("click", function() {
       let articleArray = data.articles
 
       if(articleArray.length === 0) {
-        articleSection.innerHTML = '<p>Inga artiklar funna</p>';
+        articleSection.innerHTML = '<p>No articles were found<p>'
       } else {
   
       console.log("articleArray", articleArray )
@@ -393,7 +393,7 @@ teslaButton.addEventListener("click", function() {
       let articleArray = data.articles
 
       if(articleArray.length === 0) {
-        articleSection.innerHTML = '<p>Inga artiklar funna<p>'
+        articleSection.innerHTML = '<p>No articles were found<p>'
       } else {
   
       console.log("articleArray", articleArray )
