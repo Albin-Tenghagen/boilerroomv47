@@ -89,7 +89,7 @@ searchForm.addEventListener("submit", function () {
 //------------------Category Selection--------------------------------------
 window.addEventListener("DOMContentLoaded", function(){
   //? Top headlines endpoint maybe?
-  fetch('https://newsapi.org/v2/everything?q=sverige&language=sv&from=2024-11-03&sortBy=publishedAt&apiKey=1006e9f332db40bd8553b27720785488')
+  fetch('https://newsapi.org/v2/everything?q=sverige&language=en&from=2024-11-03&sortBy=publishedAt&apiKey=1006e9f332db40bd8553b27720785488')
   .then(response =>  {
     if(!response.ok) {
         throw new Error('HTTP-fel! status' + response.statusText);
@@ -107,7 +107,7 @@ window.addEventListener("DOMContentLoaded", function(){
       articleContainer.setAttribute("class", "articleContainer")
       newsContainer.appendChild(articleContainer)
 
-      let articleTitle = document.createElement("h3")
+      let articleTitle = document.createElement("h5")
       articleTitle.textContent =  article.title
       articleTitle.setAttribute("class", "articleTitle")
       articleContainer.appendChild(articleTitle) 
@@ -135,11 +135,6 @@ window.addEventListener("DOMContentLoaded", function(){
       articleImage.setAttribute("class", "articleImage")
       articleImage.src = article.urlToImage    
       articleContainer.append(articleImage)
-
-      let readMoreButton = document.createElement("button")
-      readMoreButton.textContent = "Läs mer"
-      readMoreButton.setAttribute("class", "readMoreButton")
-      articleContainer.appendChild(readMoreButton)
     });
 })
 
@@ -154,12 +149,70 @@ window.addEventListener("DOMContentLoaded", function(){
   //TODO one article element per news, h1 for titel, p for summary, p for timeStamp, p for Author or source
 })
 
-sportButton.addEventListener("click", function() {
-  console.log("sportButton is responsive")
-  //TODO empty the newsContainer and create articles basen on category
-  //TODO should create several article elements that append to newsContainer
-  //TODO one article element per news, h1 for titel, p for summary, p for timeStamp, p for Author or source
+sportButton.addEventListener("click", function () {
+  console.log("SportButton is responsive");
+
+  // empties newsContainer
+  newsContainer.innerHTML = "";
+
+  // API-endpoint for sportnews
+  let apiUrl = `https://newsapi.org/v2/everything?q=sport&language=sv&from=2024-11-03&sortBy=publishedAt&apiKey=1006e9f332db40bd8553b27720785488`;
+
+  // Fetches data from apiUrl
+  fetch(apiUrl)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok " + response.statusText);
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+
+      let articleArray = data.articles;
+      console.log("articleArray", articleArray);
+
+      articleArray.forEach(article => {
+        let articleContainer = document.createElement("article");
+        articleContainer.setAttribute("class", "articleContainer");
+        newsContainer.appendChild(articleContainer);
+
+        let articleTitle = document.createElement("h5");
+        articleTitle.textContent = article.title;
+        articleTitle.setAttribute("class", "articleTitle");
+        articleContainer.appendChild(articleTitle);
+
+        let articleSummary = document.createElement("p");
+        articleSummary.setAttribute("class", "articleSummary");
+        articleSummary.textContent = article.description || "Ingen beskrivning tillgänglig.";
+        articleContainer.appendChild(articleSummary);
+
+        let timeStamp = document.createElement("p");
+        timeStamp.setAttribute("class", "timeStamp");
+        let publishedAt = article.publishedAt;
+        let dateAndTime = publishedAt.replace("Z", "").split("T");
+        let formattedTimeStamp = `${dateAndTime[0]} ${dateAndTime[1]}`;
+        timeStamp.textContent = formattedTimeStamp;
+        articleContainer.appendChild(timeStamp);
+
+        let articleAuthor = document.createElement("p");
+        articleAuthor.setAttribute("class", "articleAuthor");
+        articleAuthor.textContent = article.author || "Okänd författare";
+        articleContainer.appendChild(articleAuthor);
+
+
+          let articleImage = document.createElement("img");
+          articleImage.setAttribute("class", "articleImage");
+          articleImage.src = article.urlToImage;
+          articleContainer.appendChild(articleImage);
+        
+      });
+    })
+    .catch(error => console.error("There has been a problem with your fetch operation:", error));
 });
+
+
+
 
 domesticButton.addEventListener("click", function() {
   console.log("sportButton is responsive")
