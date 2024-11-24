@@ -19,7 +19,7 @@ document.body.appendChild(headerContainer)
 
 let headingHeader = document.createElement("h1")
 headingHeader.setAttribute("class", "headingHeader")
-headingHeader.innerText = "Välkommen till aktuella nyheter"
+headingHeader.innerText = "Welcome to the latest news"
 headerContainer.appendChild(headingHeader)
 
 let sportButton = document.createElement("button")
@@ -32,10 +32,10 @@ sportButton.setAttribute("class", "domesticButton")
 domesticButton.innerText = "Domestic"
 headerContainer.appendChild(domesticButton)
 
-let foreignButton = document.createElement("button")
-foreignButton.setAttribute("class", "foreignButton")
-foreignButton.innerText = "Foreign"
-headerContainer.appendChild(foreignButton)
+let teslaButton = document.createElement("button")
+teslaButton.setAttribute("class", "teslaButton")
+teslaButton.innerText = "tesla"
+headerContainer.appendChild(teslaButton)
 
 
 let economyButton = document.createElement("button")
@@ -93,7 +93,7 @@ searchForm.addEventListener("submit", function () {
 //------------------Category Selection--------------------------------------
 window.addEventListener("DOMContentLoaded", function(){
   //? Top headlines endpoint maybe?
-  fetch('https://newsapi.org/v2/everything?q=sverige&language=sv&from=2024-11-03&sortBy=publishedAt&apiKey=1006e9f332db40bd8553b27720785488')
+  fetch('https://newsapi.org/v2/top-headlines?country=us&language=en&apiKey=a5e3e0dc52244181a7517d579bb03bb5')
   .then(response =>  {
     if(!response.ok) {
         throw new Error('HTTP-fel! status' + response.statusText);
@@ -170,10 +170,10 @@ domesticButton.addEventListener("click", function() {
   //TODO one article element per news, h1 for titel, p for summary, p for timeStamp, p for Author or source
 });
 
-foreignButton.addEventListener("click", function() {
+teslaButton.addEventListener("click", function() {
   console.log("sportButton is responsive")
   articleSection.replaceChildren();
-    fetch('https://newsapi.org/v2/everything?q=language=sv&from=2024-02-03&sortBy=publishedAt&apiKey=1006e9f332db40bd8553b27720785488')
+    fetch('https://newsapi.org/v2/everything?q=tesla&language=en&from=2024-10-24&sortBy=publishedAt&apiKey=a5e3e0dc52244181a7517d579bb03bb5')
     .then(response =>  {
       if(!response.ok) {
           throw new Error('HTTP-fel! status' + response.statusText);
@@ -184,6 +184,10 @@ foreignButton.addEventListener("click", function() {
     .then(data => {
       console.log(data)
       let articleArray = data.articles
+
+      if(articleArray.length === 0) {
+        articleSection.innerHTML = '<p>Inga artiklar funna<p>'
+      } else {
   
       console.log("articleArray", articleArray )
       articleArray.forEach(article => {
@@ -225,6 +229,7 @@ foreignButton.addEventListener("click", function() {
         readMoreButton.setAttribute("class", "readMoreButton")
         articleContainer.appendChild(readMoreButton)
       });
+    }
   })
   
     .catch((err) => {
