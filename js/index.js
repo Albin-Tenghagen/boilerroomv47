@@ -3,7 +3,7 @@ function removeAllChildren(articleSection) {
     articleSection.removeChild(articleSection.firstChild)
    }
 }
-
+let articleArray = []
 //-----------------Header Creation------------------------------------------
 let headerContainer = document.createElement("header")
 headerContainer.setAttribute("class", "headerContainer")
@@ -72,7 +72,7 @@ newsContainer.appendChild(articleSection)
 
 searchForm.addEventListener("submit", function () {
 //? searchin endpoint maybe?  
-let searchTerm =  searchNewsInput.value.trim();  
+let searchTerm =  searchNewsInput.value;  
 if(searchTerm.trim() === "") {
     console.log("Error, input is empty")
   } else {
@@ -82,9 +82,9 @@ if(searchTerm.trim() === "") {
 
 })
 
-function searchForArticles(query) {
-  const yourApiKey = '1006e9f332db40bd8553b27720785488'
-  const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&language=sv&from=2024-11-03&sortBy=publishedAt&apiKey=${yourApiKey}`
+function searchForArticles(searchTerm) {
+  const yourApiKey = '0db69991ed83415fa6f591a1924e45ef'
+  const url = `https://newsapi.org/v2/everything?q=${searchTerm}&from=2024-11-03&sortBy=publishedAt&apiKey=${yourApiKey}`
   removeAllChildren(articleSection)
   fetch(url)
     .then(response =>  {
@@ -96,7 +96,7 @@ function searchForArticles(query) {
   })
   .then(data => {
     console.log(data)
-    let articleArray = data.articles
+    articleArray = data.articles
 
     if(articleArray.length === 0) {
       articleSection.innerHTML = '<p>Inga artiklar funna<p>' 
@@ -156,7 +156,7 @@ function searchForArticles(query) {
 //------------------Category Selection--------------------------------------
 window.addEventListener("DOMContentLoaded", function(){
   //? Top headlines endpoint maybe?
-  fetch('https://newsapi.org/v2/everything?q=sverige&language=sv&from=2024-11-03&sortBy=publishedAt&apiKey=1006e9f332db40bd8553b27720785488')
+  fetch('https://newsapi.org/v2/everything?q=sverige&language=sv&from=2024-11-03&sortBy=publishedAt&apiKey=0db69991ed83415fa6f591a1924e45ef')
   .then(response =>  {
     if(!response.ok) {
         throw new Error('HTTP-fel! status' + response.statusText);
@@ -166,7 +166,7 @@ window.addEventListener("DOMContentLoaded", function(){
   })
   .then(data => {
     console.log(data)
-    let articleArray = data.articles
+    articleArray = data.articles
 
     console.log("articleArray", articleArray )
     articleArray.forEach(article => {
@@ -243,11 +243,11 @@ foreignButton.addEventListener("click", function() {
 });
 
 economyButton.addEventListener("click", function() {
-  let articleArray = [] 
+  
   removeAllChildren(articleSection)
   console.log("articleArray", articleArray)  
   console.log("economyButton is responsive")
-  fetch('https://newsapi.org/v2/top-headlines/sources?language=sv&category=business&apiKey=1006e9f332db40bd8553b27720785488')
+  fetch('https://newsapi.org/v2/top-headlines?language=en&category=business&apiKey=0db69991ed83415fa6f591a1924e45ef')
   .then(response =>  {
     if(!response.ok) {
         throw new Error('HTTP-fel! status' + response.statusText);
@@ -257,9 +257,9 @@ economyButton.addEventListener("click", function() {
   })
   .then(data => {
     console.log(data)
-    let articleArray = data.articles
+    articleArray = data.articles
 
-    if(articleArray === undefined) {
+    if(articleArray.length === 0) {
       articleSection.innerHTML = '<p>Inga artiklar funna<p>' 
     } else {
 
