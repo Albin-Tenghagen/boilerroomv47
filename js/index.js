@@ -224,6 +224,73 @@ window.addEventListener("DOMContentLoaded", function(){
 
 //------------------Category Selection--------------------------------------
 
+techButton.addEventListener("click", function () {
+  console.log("SportButton is responsive");
+
+  // empties newsContainer
+  newsContainer.innerHTML = "";
+
+  // API-endpoint for sportnews
+  let apiUrl = `https://newsapi.org/v2/everything?q=tech&language=en&from=2024-11-03&sortBy=publishedAt&apiKey=a5e3e0dc52244181a7517d579bb03bb5`;
+
+  // Fetches data from apiUrl
+  fetch(apiUrl)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok " + response.statusText);
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+
+      let articleArray = data.articles;
+      console.log("articleArray", articleArray);
+
+        articleArray.forEach(article => {
+        let articleContainer = document.createElement("article");
+        articleContainer.setAttribute("class", "articleContainer");
+        newsContainer.appendChild(articleContainer);
+
+        let articleTitle = document.createElement("h3");
+        articleTitle.textContent = article.title;
+        articleTitle.setAttribute("class", "articleTitle");
+        articleContainer.appendChild(articleTitle);
+
+        let articleSummary = document.createElement("p");
+        articleSummary.setAttribute("class", "articleSummary");
+        articleSummary.textContent = article.description || "No description available.";
+        articleContainer.appendChild(articleSummary);
+
+        let timeStamp = document.createElement("p");
+        timeStamp.setAttribute("class", "timeStamp");
+        let publishedAt = article.publishedAt;
+        let dateAndTime = publishedAt.replace("Z", "").split("T");
+        let formattedTimeStamp = `${dateAndTime[0]} ${dateAndTime[1]}`;
+        timeStamp.textContent = formattedTimeStamp;
+        articleContainer.appendChild(timeStamp);
+
+        let articleAuthor = document.createElement("p");
+        articleAuthor.setAttribute("class", "articleAuthor");
+        articleAuthor.textContent = article.author || "Unknown author";
+        articleContainer.appendChild(articleAuthor);
+
+
+          let articleImage = document.createElement("img");
+          articleImage.setAttribute("class", "articleImage");
+          articleImage.src = article.urlToImage;
+          articleContainer.appendChild(articleImage);
+
+          let readMoreButton = document.createElement("a")
+          readMoreButton.textContent = "Read more"
+          readMoreButton.setAttribute("class", "readMoreButton")
+          readMoreButton.href = article.url
+          articleContainer.appendChild(readMoreButton)
+
+      });
+    })
+    .catch(error => console.error("There has been a problem with your fetch operation:", error));
+});
 
 appleButton.addEventListener("click", function() {
   console.log("sportButton is responsive")
