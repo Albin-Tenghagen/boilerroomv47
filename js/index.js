@@ -77,7 +77,7 @@ searchForm.addEventListener("submit", function (event) {
   
   function searchForArticles(query) {
   
-    const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&language=en&from=2024-11-03&sortBy=publishedAt&apiKey=0db69991ed83415fa6f591a1924e45ef`
+    const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&language=en&from=2024-11-5&sortBy=publishedAt&apiKey=0db69991ed83415fa6f591a1924e45ef`
     removeAllChildren(articleSection)
     fetch(url)
       .then(response =>  {
@@ -225,7 +225,7 @@ techButton.addEventListener("click", function () {
   articleSection.replaceChildren();
 
   // API-endpoint for sportnews
-  let apiUrl = `https://newsapi.org/v2/everything?q=tech&language=en&from=2024-11-03&sortBy=publishedAt&apiKey=0db69991ed83415fa6f591a1924e45ef`;
+  let apiUrl = `https://newsapi.org/v2/everything?q=tech&language=en&from=2024-11-05&sortBy=publishedAt&apiKey=0db69991ed83415fa6f591a1924e45ef`;
 
   // Fetches data from apiUrl
   fetch(apiUrl)
@@ -298,7 +298,7 @@ techButton.addEventListener("click", function () {
 appleButton.addEventListener("click", function() {
   console.log("sportButton is responsive")
   articleSection.replaceChildren();
-    fetch('https://newsapi.org/v2/everything?q=apple&language=en&from=2024-10-24&sortBy=publishedAt&apiKey=0db69991ed83415fa6f591a1924e45ef')
+    fetch('https://newsapi.org/v2/everything?q=apple&language=en&from=2024-11-5&sortBy=publishedAt&apiKey=0db69991ed83415fa6f591a1924e45ef')
     .then(response =>  {
       if(!response.ok) {
           throw new Error('HTTP-fel! status' + response.statusText);
@@ -367,7 +367,7 @@ appleButton.addEventListener("click", function() {
 teslaButton.addEventListener("click", function() {
   console.log("tesla is responsive")
   articleSection.replaceChildren();
-    fetch('https://newsapi.org/v2/everything?q=tesla&language=en&from=2024-10-24&sortBy=publishedAt&apiKey=0db69991ed83415fa6f591a1924e45ef')
+    fetch('https://newsapi.org/v2/everything?q=tesla&language=en&from=2024-11-5&sortBy=publishedAt&apiKey=0db69991ed83415fa6f591a1924e45ef')
     .then(response =>  {
       if(!response.ok) {
           throw new Error('HTTP-fel! status' + response.statusText);
