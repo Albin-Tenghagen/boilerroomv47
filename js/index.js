@@ -5,10 +5,6 @@ function removeAllChildren(articleSection) {
 }
 let articleArray = []
 
-//API CALLS 
-
-
-
 //-----------------Header Creation------------------------------------------
 let headerContainer = document.createElement("header")
 headerContainer.setAttribute("class", "headerContainer")
@@ -33,7 +29,6 @@ let teslaButton = document.createElement("button")
 teslaButton.setAttribute("class", "teslaButton")
 teslaButton.innerText = "tesla"
 headerContainer.appendChild(teslaButton)
-
 
 let economyButton = document.createElement("button")
 economyButton.setAttribute("class", "economyButton")
@@ -66,13 +61,6 @@ newsContainer.appendChild(articleSection)
 //--------------------------------------------------------------------------
 
 //----------------------Search function-------------------------------------
-// searchNewsInput.addEventListener("submit", function() {
-//   if(searchNewsInput.value.trim() === "") {
-//     console.log("Error, input is empty")
-//   } else {
-//     console.log("input is not empty, yay!")
-//   }
-// })
 
 searchForm.addEventListener("submit", function (event) {
   //? searchin endpoint maybe?  
@@ -157,8 +145,7 @@ searchForm.addEventListener("submit", function (event) {
   }
 //--------------------------------------------------------------------------
 
-
-//------------------Category Selection--------------------------------------
+//------------------------Default News--------------------------------------
 window.addEventListener("DOMContentLoaded", function(){
   //? Top headlines endpoint maybe?
   fetch('https://newsapi.org/v2/top-headlines?country=us&language=en&apiKey=0db69991ed83415fa6f591a1924e45ef')
@@ -251,7 +238,7 @@ techButton.addEventListener("click", function () {
   })
   .then(data => {
     console.log(data)
-    let articleArray = data.articles
+    articleArray = data.articles
 
     if(articleArray.length === 0) {
       articleSection.innerHTML = '<p>No articles were found<p>'
@@ -289,6 +276,7 @@ techButton.addEventListener("click", function () {
     
       let articleImage = document.createElement("img")
       articleImage.setAttribute("class", "articleImage")
+      articleImage.setAttribute("alt", "Picture loaded incorrectly because of cookies")
       articleImage.src = article.urlToImage    
       articleContainer.append(articleImage)
 
@@ -305,9 +293,6 @@ techButton.addEventListener("click", function () {
     console.log("error", err)
   })
 
-
-
-
 });
 
 appleButton.addEventListener("click", function() {
@@ -323,7 +308,7 @@ appleButton.addEventListener("click", function() {
     })
     .then(data => {
       console.log(data)
-      let articleArray = data.articles
+      articleArray = data.articles
 
       if(articleArray.length === 0) {
         articleSection.innerHTML = '<p>No articles were found<p>'
@@ -377,19 +362,10 @@ appleButton.addEventListener("click", function() {
       console.log("error", err)
     })
   
-  
-  
-  
 });
 
-  
-    //TODO empty the newsContainer and create articles basen on category
-  //TODO should create several article elements that append to newsContainer
-  //TODO one article element per news, h1 for titel, p for summary, p for timeStamp, p for Author or source
-
-
 teslaButton.addEventListener("click", function() {
-  console.log("sportButton is responsive")
+  console.log("tesla is responsive")
   articleSection.replaceChildren();
     fetch('https://newsapi.org/v2/everything?q=tesla&language=en&from=2024-10-24&sortBy=publishedAt&apiKey=0db69991ed83415fa6f591a1924e45ef')
     .then(response =>  {
@@ -401,7 +377,7 @@ teslaButton.addEventListener("click", function() {
     })
     .then(data => {
       console.log(data)
-      let articleArray = data.articles
+      articleArray = data.articles
 
       if(articleArray.length === 0) {
         articleSection.innerHTML = '<p>No articles were found<p>'
@@ -453,21 +429,10 @@ teslaButton.addEventListener("click", function() {
   
     .catch((err) => {
       console.log("error", err)
-    })
-  
-  
-  
+    })  
   
   });
   
-
-    
-  
-  //TODO empty the newsContainer and create articles basen on category
-  //TODO should create several article elements that append to newsContainer
-  //TODO one article element per news, h1 for titel, p for summary, p for timeStamp, p for Author or source
-
-
 economyButton.addEventListener("click", function() {
   
   removeAllChildren(articleSection)
@@ -538,10 +503,7 @@ economyButton.addEventListener("click", function() {
   .catch((err) => {
     console.log("error", err)
   })
-    //TODO empty the newsContainer and create articles basen on category
-    //TODO empty the newsContainer and create articles basen on category
-  //TODO should create several article elements that append to newsContainer
-  //TODO one article element per news, h1 for titel, p for summary, p for timeStamp, p for Author or source
+  
 });
-
+//--------------------------------------------------------------------------
 
