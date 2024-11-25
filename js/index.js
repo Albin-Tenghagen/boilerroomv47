@@ -22,12 +22,12 @@ headerContainer.appendChild(techButton)
 
 let appleButton = document.createElement("button")
 appleButton.setAttribute("class", "appleButton")
-appleButton.innerText = "apple"
+appleButton.innerText = "Apple"
 headerContainer.appendChild(appleButton)
 
 let teslaButton = document.createElement("button")
 teslaButton.setAttribute("class", "teslaButton")
-teslaButton.innerText = "tesla"
+teslaButton.innerText = "Tesla"
 headerContainer.appendChild(teslaButton)
 
 let economyButton = document.createElement("button")
@@ -67,6 +67,7 @@ searchForm.addEventListener("submit", function (event) {
   let searchTerm =  searchNewsInput.value;  
   if(searchTerm.trim() === "") {
       console.log("Error, input is empty")
+      searchNewsInput.setAttribute("placeholder", ("Input field can not be empty. Please try again."))
     } else {
       console.log("input is not empty, yay!")
       searchForArticles(searchTerm)
