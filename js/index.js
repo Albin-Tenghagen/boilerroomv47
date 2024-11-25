@@ -177,14 +177,6 @@ window.addEventListener("DOMContentLoaded", function(){
 
     console.log("articleArray", articleArray )
     articleArray.forEach(article => {
-      if (!article.title || !article.description || !article.url) {
-        // Show a message for missing articles
-        let missingArticleMessage = document.createElement("p");
-        missingArticleMessage.setAttribute("class", "error-article");
-        missingArticleMessage.textContent = "Sorry, an article couldn't be displayed.";
-        articleSection.appendChild(missingArticleMessage);
-        return;  // Skip to the next article
-      }
       let articleContainer = document.createElement("article")
       articleContainer.setAttribute("class", "articleContainer")
       articleSection.appendChild(articleContainer)
