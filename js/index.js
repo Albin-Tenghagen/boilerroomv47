@@ -76,7 +76,7 @@ searchForm.addEventListener("submit", function (event) {
   
   function searchForArticles(query) {
   
-    const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&language=en&from=2024-11-5&sortBy=publishedAt&apiKey=0db69991ed83415fa6f591a1924e45ef`
+    const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&language=en&from=2024-11-5&sortBy=publishedAt&apiKey=1006e9f332db40bd8553b27720785488`
     removeAllChildren(articleSection)
     fetch(url)
       .then(response =>  {
@@ -147,7 +147,7 @@ searchForm.addEventListener("submit", function (event) {
 
 //------------------------Default News--------------------------------------
 window.addEventListener("DOMContentLoaded", function(){
-  fetch('https://newsapi.org/v2/top-headlines?country=us&language=en&apiKey=0db69991ed83415fa6f591a1924e45ef')
+  fetch('https://newsapi.org/v2/top-headlines?country=us&language=en&apiKey=1006e9f332db40bd8553b27720785488')
   .then(response =>  {
     if(!response.ok) {
         throw new Error('HTTP-fel! status' + response.statusText);
@@ -219,13 +219,13 @@ window.addEventListener("DOMContentLoaded", function(){
 //------------------Category Selection--------------------------------------
 
 techButton.addEventListener("click", function () {
-  console.log("SportButton is responsive");
+  console.log("techButton is responsive");
 
   // empties newsContainer
   articleSection.replaceChildren();
 
-  // API-endpoint for sportnews
-  let apiUrl = `https://newsapi.org/v2/everything?q=tech&language=en&from=2024-11-05&sortBy=publishedAt&apiKey=0db69991ed83415fa6f591a1924e45ef`;
+  // API-endpoint for technews
+  let apiUrl = `https://newsapi.org/v2/everything?q=tech&language=en&from=2024-11-05&sortBy=publishedAt&apiKey=1006e9f332db40bd8553b27720785488`;
 
   // Fetches data from apiUrl
   fetch(apiUrl)
@@ -297,9 +297,9 @@ techButton.addEventListener("click", function () {
 });
 
 appleButton.addEventListener("click", function() {
-  console.log("sportButton is responsive")
+  console.log("appleButton is responsive")
   articleSection.replaceChildren();
-    fetch('https://newsapi.org/v2/everything?q=apple&language=en&from=2024-11-5&sortBy=publishedAt&apiKey=0db69991ed83415fa6f591a1924e45ef')
+    fetch('https://newsapi.org/v2/everything?q=apple&language=en&from=2024-11-5&sortBy=publishedAt&apiKey=1006e9f332db40bd8553b27720785488')
     .then(response =>  {
       if(!response.ok) {
           throw new Error('HTTP-fel! status' + response.statusText);
@@ -369,7 +369,7 @@ appleButton.addEventListener("click", function() {
 teslaButton.addEventListener("click", function() {
   console.log("tesla is responsive")
   articleSection.replaceChildren();
-    fetch('https://newsapi.org/v2/everything?q=tesla&language=en&from=2024-11-5&sortBy=publishedAt&apiKey=0db69991ed83415fa6f591a1924e45ef')
+    fetch('https://newsapi.org/v2/everything?q=tesla&language=en&from=2024-11-5&sortBy=publishedAt&apiKey=1006e9f332db40bd8553b27720785488')
     .then(response =>  {
       if(!response.ok) {
           throw new Error('HTTP-fel! status' + response.statusText);
@@ -441,7 +441,7 @@ economyButton.addEventListener("click", function() {
   removeAllChildren(articleSection)
   console.log("articleArray", articleArray)  
   console.log("economyButton is responsive")
-  fetch('https://newsapi.org/v2/top-headlines?language=en&category=business&apiKey=0db69991ed83415fa6f591a1924e45ef')
+  fetch('https://newsapi.org/v2/top-headlines?language=en&category=business&apiKey=1006e9f332db40bd8553b27720785488')
   .then(response =>  {
     if(!response.ok) {
         throw new Error('HTTP-fel! status' + response.statusText);
