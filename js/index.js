@@ -62,8 +62,7 @@ newsContainer.appendChild(articleSection)
 
 //----------------------Search function-------------------------------------
 
-searchForm.addEventListener("submit", function (event) {
-  //? searchin endpoint maybe?  
+searchForm.addEventListener("submit", function (event) { 
   event.preventDefault()
   let searchTerm =  searchNewsInput.value;  
   if(searchTerm.trim() === "") {
@@ -133,6 +132,7 @@ searchForm.addEventListener("submit", function (event) {
         let readMoreButton = document.createElement("a")
           readMoreButton.textContent = "Read more"
           readMoreButton.setAttribute("class", "readMoreButton")
+          readMoreButton.setAttribute("target", "_blank")
           readMoreButton.href = article.url
           articleContainer.appendChild(readMoreButton)
       });
@@ -147,7 +147,6 @@ searchForm.addEventListener("submit", function (event) {
 
 //------------------------Default News--------------------------------------
 window.addEventListener("DOMContentLoaded", function(){
-  //? Top headlines endpoint maybe?
   fetch('https://newsapi.org/v2/top-headlines?country=us&language=en&apiKey=0db69991ed83415fa6f591a1924e45ef')
   .then(response =>  {
     if(!response.ok) {
@@ -202,6 +201,7 @@ window.addEventListener("DOMContentLoaded", function(){
       let readMoreButton = document.createElement("a")
           readMoreButton.textContent = "Read more"
           readMoreButton.setAttribute("class", "readMoreButton")
+          readMoreButton.setAttribute("target", "_blank")
           readMoreButton.href = article.url
           articleContainer.appendChild(readMoreButton)
     });
@@ -283,6 +283,7 @@ techButton.addEventListener("click", function () {
       let readMoreButton = document.createElement("a")
         readMoreButton.textContent = "Read more"
         readMoreButton.setAttribute("class", "readMoreButton")
+        readMoreButton.setAttribute("target", "_blank")
         readMoreButton.href = article.url
         articleContainer.appendChild(readMoreButton)
     });
@@ -352,6 +353,7 @@ appleButton.addEventListener("click", function() {
         let readMoreButton = document.createElement("a")
           readMoreButton.textContent = "Read more"
           readMoreButton.setAttribute("class", "readMoreButton")
+          readMoreButton.setAttribute("target", "_blank")
           readMoreButton.href = article.url
           articleContainer.appendChild(readMoreButton)
       });
@@ -421,6 +423,7 @@ teslaButton.addEventListener("click", function() {
         let readMoreButton = document.createElement("a")
           readMoreButton.textContent = "Read more"
           readMoreButton.setAttribute("class", "readMoreButton")
+          readMoreButton.setAttribute("target", "_blank")
           readMoreButton.href = article.url
           articleContainer.appendChild(readMoreButton)
       });
@@ -493,6 +496,7 @@ economyButton.addEventListener("click", function() {
       let readMoreButton = document.createElement("a")
           readMoreButton.textContent = "Read more"
           readMoreButton.setAttribute("class", "readMoreButton")
+          readMoreButton.setAttribute("target", "_blank")
           readMoreButton.href = article.url
           articleContainer.appendChild(readMoreButton)
     });
