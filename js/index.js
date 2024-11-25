@@ -81,11 +81,14 @@ searchForm.addEventListener("submit", function (event) {
     removeAllChildren(articleSection)
     fetch(url)
       .then(response =>  {
-      if(!response.ok) {
-          throw new Error('HTTP-fel! status' + response.statusText);
-      }
-      console.log("response", response )
-      return response.json()
+        if (!response.ok) {
+          if (response.status === 404) {
+            throw new Error('404: Resource not found');
+          } else {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+        }
+        return response.json();
     })
     .then(data => {
       console.log(data)
@@ -93,6 +96,7 @@ searchForm.addEventListener("submit", function (event) {
   
       if(articleArray.length === 0) {
         articleSection.innerHTML = '<p>No articles were found<p>' 
+        
       } else {
   
       console.log("articleArray", articleArray )
@@ -141,8 +145,12 @@ searchForm.addEventListener("submit", function (event) {
   })
   
     .catch((err) => {
-      console.log("error", err)
-    })
+      if (err.message.includes('404')) {
+        articleSection.innerHTML = '<p>Sorry, the requested resource was not found (404).</p>';
+      } else {
+        console.log("Error:", err);
+        articleSection.innerHTML = `<p>An error occurred: ${err.message}</p>`;
+      }    })
   }
 //--------------------------------------------------------------------------
 
@@ -150,11 +158,14 @@ searchForm.addEventListener("submit", function (event) {
 window.addEventListener("DOMContentLoaded", function(){
   fetch('https://newsapi.org/v2/top-headlines?country=us&language=en&apiKey=1006e9f332db40bd8553b27720785488')
   .then(response =>  {
-    if(!response.ok) {
-        throw new Error('HTTP-fel! status' + response.statusText);
+    if (!response.ok) {
+      if (response.status === 404) {
+        throw new Error('404: Resource not found');
+      } else {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
     }
-    console.log("response", response )
-    return response.json()
+    return response.json();
   })
   .then(data => {
     console.log(data)
@@ -166,6 +177,14 @@ window.addEventListener("DOMContentLoaded", function(){
 
     console.log("articleArray", articleArray )
     articleArray.forEach(article => {
+      if (!article.title || !article.description || !article.url) {
+        // Show a message for missing articles
+        let missingArticleMessage = document.createElement("p");
+        missingArticleMessage.setAttribute("class", "error-article");
+        missingArticleMessage.textContent = "Sorry, an article couldn't be displayed.";
+        articleSection.appendChild(missingArticleMessage);
+        return;  // Skip to the next article
+      }
       let articleContainer = document.createElement("article")
       articleContainer.setAttribute("class", "articleContainer")
       articleSection.appendChild(articleContainer)
@@ -210,8 +229,12 @@ window.addEventListener("DOMContentLoaded", function(){
 })
 
   .catch((err) => {
-    console.log("error", err)
-  })
+    if (err.message.includes('404')) {
+      articleSection.innerHTML = '<p>Sorry, the requested resource was not found (404).</p>';
+    } else {
+      console.log("Error:", err);
+      articleSection.innerHTML = `<p>An error occurred: ${err.message}</p>`;
+    }  })
 });
 
 //--------------------------------------------------------------------------
@@ -231,11 +254,14 @@ techButton.addEventListener("click", function () {
   // Fetches data from apiUrl
   fetch(apiUrl)
   .then(response =>  {
-    if(!response.ok) {
-        throw new Error('HTTP-fel! status' + response.statusText);
+    if (!response.ok) {
+      if (response.status === 404) {
+        throw new Error('404: Resource not found');
+      } else {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
     }
-    console.log("response", response )
-    return response.json()
+    return response.json();
   })
   .then(data => {
     console.log(data)
@@ -277,7 +303,7 @@ techButton.addEventListener("click", function () {
     
       let articleImage = document.createElement("img")
       articleImage.setAttribute("class", "articleImage")
-      articleImage.setAttribute("alt", "Picture loaded incorrectly because of cookies")
+      
       articleImage.src = article.urlToImage    
       articleContainer.append(articleImage)
 
@@ -292,7 +318,12 @@ techButton.addEventListener("click", function () {
 })
 
   .catch((err) => {
-    console.log("error", err)
+    if (err.message.includes('404')) {
+      articleSection.innerHTML = '<p>Sorry, the requested resource was not found (404).</p>';
+    } else {
+      console.log("Error:", err);
+      articleSection.innerHTML = `<p>An error occurred: ${err.message}</p>`;
+    }
   })
 
 });
@@ -302,11 +333,14 @@ appleButton.addEventListener("click", function() {
   articleSection.replaceChildren();
     fetch('https://newsapi.org/v2/everything?q=apple&language=en&from=2024-11-5&sortBy=publishedAt&apiKey=1006e9f332db40bd8553b27720785488')
     .then(response =>  {
-      if(!response.ok) {
-          throw new Error('HTTP-fel! status' + response.statusText);
+      if (!response.ok) {
+        if (response.status === 404) {
+          throw new Error('404: Resource not found');
+        } else {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
       }
-      console.log("response", response )
-      return response.json()
+      return response.json();
     })
     .then(data => {
       console.log(data)
@@ -362,8 +396,12 @@ appleButton.addEventListener("click", function() {
   })
   
     .catch((err) => {
-      console.log("error", err)
-    })
+      if (err.message.includes('404')) {
+        articleSection.innerHTML = '<p>Sorry, the requested resource was not found (404).</p>';
+      } else {
+        console.log("Error:", err);
+        articleSection.innerHTML = `<p>An error occurred: ${err.message}</p>`;
+      }    })
   
 });
 
@@ -372,11 +410,14 @@ teslaButton.addEventListener("click", function() {
   articleSection.replaceChildren();
     fetch('https://newsapi.org/v2/everything?q=tesla&language=en&from=2024-11-5&sortBy=publishedAt&apiKey=1006e9f332db40bd8553b27720785488')
     .then(response =>  {
-      if(!response.ok) {
-          throw new Error('HTTP-fel! status' + response.statusText);
+      if (!response.ok) {
+        if (response.status === 404) {
+          throw new Error('404: Resource not found');
+        } else {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
       }
-      console.log("response", response )
-      return response.json()
+      return response.json();
     })
     .then(data => {
       console.log(data)
@@ -432,8 +473,12 @@ teslaButton.addEventListener("click", function() {
   })
   
     .catch((err) => {
-      console.log("error", err)
-    })  
+      if (err.message.includes('404')) {
+        articleSection.innerHTML = '<p>Sorry, the requested resource was not found (404).</p>';
+      } else {
+        console.log("Error:", err);
+        articleSection.innerHTML = `<p>An error occurred: ${err.message}</p>`;
+      }    })  
   
   });
   
@@ -444,11 +489,14 @@ economyButton.addEventListener("click", function() {
   console.log("economyButton is responsive")
   fetch('https://newsapi.org/v2/top-headlines?language=en&category=business&apiKey=1006e9f332db40bd8553b27720785488')
   .then(response =>  {
-    if(!response.ok) {
-        throw new Error('HTTP-fel! status' + response.statusText);
+    if (!response.ok) {
+      if (response.status === 404) {
+        throw new Error('404: Resource not found');
+      } else {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
     }
-    console.log("response", response )
-    return response.json()
+    return response.json();
   })
   .then(data => {
     console.log(data)
@@ -506,8 +554,12 @@ economyButton.addEventListener("click", function() {
   })
 
   .catch((err) => {
-    console.log("error", err)
-  })
+    if (err.message.includes('404')) {
+      articleSection.innerHTML = '<p>Sorry, the requested resource was not found (404).</p>';
+    } else {
+      console.log("Error:", err);
+      articleSection.innerHTML = `<p>An error occurred: ${err.message}</p>`;
+    }  })
   
 });
 //--------------------------------------------------------------------------
